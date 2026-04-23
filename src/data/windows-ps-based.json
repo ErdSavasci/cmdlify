@@ -1,0 +1,548 @@
+[
+  {
+    "id": "1",
+    "conceptId": "core-print-working-dir",
+    "command": "Get-Location",
+    "description": "Gets information about the current working location or directory.",
+    "category": "file-system",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "2",
+    "conceptId": "core-create-dir-tree",
+    "command": "New-Item -Path 'folder\\subfolder' -ItemType Directory -Force",
+    "description": "Creates a new directory and any missing parent directories.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-ItemType Directory", "meaning": "Specifies that the new item is a folder." },
+      { "flag": "-Force", "meaning": "Creates parent directories if they don't exist without throwing an error." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "3",
+    "conceptId": "core-delete-dir-recursive",
+    "command": "Remove-Item -Path 'target_folder' -Recurse -Force",
+    "description": "Deletes the specified items, including all child items, forcefully.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-Recurse", "meaning": "Deletes the items in the specified locations and in all child items." },
+      { "flag": "-Force", "meaning": "Allows the cmdlet to remove items that cannot otherwise be changed, such as hidden or read-only files." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "4",
+    "conceptId": "core-find-file-name",
+    "command": "Get-ChildItem -Path . -Filter \"filename.txt\" -Recurse -ErrorAction SilentlyContinue",
+    "description": "Searches for a specific file recursively, suppressing permission denied errors.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-Filter", "meaning": "Specifies a filter to qualify the Path parameter." },
+      { "flag": "-Recurse", "meaning": "Gets the items in the specified locations and in all child items." },
+      { "flag": "-ErrorAction SilentlyContinue", "meaning": "Hides errors, useful for directories you don't have permission to read." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "5",
+    "conceptId": "core-view-file-contents",
+    "command": "Get-Content filename.txt",
+    "description": "Gets the content of the item at the specified location.",
+    "category": "file-system",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "6",
+    "conceptId": "core-monitor-processes",
+    "command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 15",
+    "description": "Lists the top 15 running processes sorted by highest CPU usage.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "-Descending", "meaning": "Sorts the output in descending order." },
+      { "flag": "-First 15", "meaning": "Selects only the first 15 objects from the pipeline." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "7",
+    "conceptId": "core-list-processes",
+    "command": "Get-Process",
+    "description": "Gets a list of all processes running on the local computer.",
+    "category": "process-management",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "8",
+    "conceptId": "core-kill-process-pid",
+    "command": "Stop-Process -Id <PID> -Force",
+    "description": "Stops one or more running processes using their Process ID.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "-Id", "meaning": "Specifies the process IDs of the processes to stop." },
+      { "flag": "-Force", "meaning": "Stops the process immediately, bypassing any confirmation prompts." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "9",
+    "conceptId": "core-kill-process-name",
+    "command": "Stop-Process -Name \"<process_name>\" -Force",
+    "description": "Stops all processes with the specified name.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "-Name", "meaning": "Specifies the process names to be stopped (without the .exe extension)." },
+      { "flag": "-Force", "meaning": "Forces the process to stop without prompting for user confirmation." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "10",
+    "conceptId": "core-run-background",
+    "command": "Start-Process -FilePath \"command.exe\" -WindowStyle Hidden",
+    "description": "Starts a local process and hides its window from the user.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "-FilePath", "meaning": "Specifies the path and name of the program to run." },
+      { "flag": "-WindowStyle Hidden", "meaning": "Starts the process with a hidden window so it runs entirely in the background." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "11",
+    "conceptId": "core-add-user",
+    "command": "New-LocalUser -Name \"<username>\" -NoPassword",
+    "description": "Creates a new local user account on the system without an initial password.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "-Name", "meaning": "Specifies the name of the new user account." },
+      { "flag": "-NoPassword", "meaning": "Creates the account without requiring a secure string password upfront." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "12",
+    "conceptId": "core-change-password",
+    "command": "$Password = Read-Host -AsSecureString; Set-LocalUser -Name \"<username>\" -Password $Password",
+    "description": "Securely prompts for a new password and assigns it to the target user.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "-AsSecureString", "meaning": "Masks the password input in the console for security." },
+      { "flag": "-Password", "meaning": "Applies the secure string to the target account." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "13",
+    "conceptId": "core-switch-user",
+    "command": "Start-Process powershell -Credential <username>",
+    "description": "Launches a new PowerShell session using the credentials of another user.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "-Credential", "meaning": "Prompts for the password of the specified user account to launch the process." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "14",
+    "conceptId": "core-list-users",
+    "command": "Get-LocalUser",
+    "description": "Retrieves a formatted list of all local user accounts, including their enabled status.",
+    "category": "user-management",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "15",
+    "conceptId": "core-delete-user",
+    "command": "Remove-LocalUser -Name \"<username>\"",
+    "description": "Deletes a local user account. Note: This does not automatically delete their profile data folder.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "-Name", "meaning": "Specifies the exact name of the local user account to remove." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "16",
+    "conceptId": "core-sys-info",
+    "command": "Get-ComputerInfo",
+    "description": "Gets a consolidated object of system and operating system properties.",
+    "category": "system-administration",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "17",
+    "conceptId": "core-disk-space",
+    "command": "Get-Volume",
+    "description": "Gets the specified Volume object, displaying health status, file system type, size, and remaining free space.",
+    "category": "system-administration",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "18",
+    "conceptId": "core-uptime",
+    "command": "Get-Uptime",
+    "description": "Gets the time elapsed since the last boot of the operating system (requires PowerShell 6+).",
+    "category": "system-administration",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "19",
+    "conceptId": "core-reboot",
+    "command": "Restart-Computer -Force",
+    "description": "Restarts the operating system on local and remote computers.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "-Force", "meaning": "Forces the computer to restart immediately, even if other users are logged on or programs are running." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "20",
+    "conceptId": "core-start-service",
+    "command": "Start-Service -Name \"<service_name>\"",
+    "description": "Starts one or more stopped services.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "-Name", "meaning": "Specifies the exact service names for the service to be started." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "21",
+    "conceptId": "core-change-permissions",
+    "command": "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser",
+    "description": "Changes the user preference for the PowerShell execution policy, determining which scripts are allowed to run.",
+    "category": "security",
+    "flags": [
+      { "flag": "RemoteSigned", "meaning": "Requires that all scripts and configuration files downloaded from the internet are signed by a trusted publisher." },
+      { "flag": "-Scope CurrentUser", "meaning": "Applies the execution policy only to the current logged-in user, avoiding system-wide registry changes." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "22",
+    "conceptId": "core-change-owner",
+    "command": "takeown /f \"<file>\" /a",
+    "description": "Takes ownership of a file or directory and gives ownership to the local Administrators group instead of the current user.",
+    "category": "security",
+    "flags": [
+      { "flag": "/f", "meaning": "Specifies the target file or directory." },
+      { "flag": "/a", "meaning": "Gives ownership to the Administrators group instead of the currently logged-on user." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "23",
+    "conceptId": "core-elevate-privileges",
+    "command": "Start-Process powershell -Verb RunAs",
+    "description": "Launches a new PowerShell window with elevated Administrator privileges (triggers UAC prompt).",
+    "category": "security",
+    "flags": [
+      { "flag": "-Verb RunAs", "meaning": "Instructs Windows to trigger the User Account Control (UAC) prompt to elevate the process." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "24",
+    "conceptId": "core-whoami",
+    "command": "[Security.Principal.WindowsIdentity]::GetCurrent().Name",
+    "description": "Retrieves the underlying .NET identity object to accurately output the domain and username of the current session.",
+    "category": "security",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "25",
+    "conceptId": "core-generate-ssh-key",
+    "command": "ssh-keygen -t ed25519 -C \"your_email@example.com\"",
+    "description": "Generates a new SSH key pair natively in PowerShell via the built-in OpenSSH client.",
+    "category": "security",
+    "flags": [
+      { "flag": "-t ed25519", "meaning": "Specifies the modern, highly secure Ed25519 cryptographic algorithm." },
+      { "flag": "-C", "meaning": "Adds a descriptive comment to the public key file." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "26",
+    "conceptId": "core-network-ping",
+    "command": "Test-Connection -ComputerName <hostname> -Count 4",
+    "description": "Sends ICMP echo request packets, or pings, to one or more computers. Returns robust PowerShell objects instead of pure text.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-ComputerName", "meaning": "Specifies the computers to ping." },
+      { "flag": "-Count 4", "meaning": "Specifies the number of echo requests to send." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "27",
+    "conceptId": "core-network-interfaces",
+    "command": "Get-NetIPConfiguration",
+    "description": "Gets the IP network configuration, including interfaces, IP addresses, and DNS servers.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "28",
+    "conceptId": "core-network-trace",
+    "command": "Test-NetConnection -ComputerName <hostname> -TraceRoute",
+    "description": "Displays diagnostic information for a connection, including a full trace route to the target host.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-TraceRoute", "meaning": "Indicates that the cmdlet performs a route trace to the destination." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "29",
+    "conceptId": "core-network-connections",
+    "command": "Get-NetTCPConnection",
+    "description": "Gets current TCP connections, showing local/remote ports and IP addresses as filterable objects.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "30",
+    "conceptId": "core-network-dns-lookup",
+    "command": "Resolve-DnsName -Name <domain>",
+    "description": "Performs a DNS query for the specified name and returns a structured object containing the records.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-Name", "meaning": "Specifies the domain name to resolve." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "31",
+    "conceptId": "core-dev-git-status",
+    "command": "git status",
+    "description": "Displays the state of the working directory and the staging area in a Git repository.",
+    "category": "development-tools",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "32",
+    "conceptId": "core-dev-http-request",
+    "command": "Invoke-RestMethod -Uri \"https://api.example.com\" -Method Get",
+    "description": "Sends an HTTP or HTTPS request to a RESTful web service and automatically parses the JSON/XML response into objects.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-Uri", "meaning": "Specifies the Uniform Resource Identifier (URI) of the Internet resource to which the web request is sent." },
+      { "flag": "-Method", "meaning": "Specifies the method used for the web request (e.g., Get, Post, Put, Delete)." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "33",
+    "conceptId": "core-dev-search-logs",
+    "command": "Select-String -Path \"*.log\" -Pattern \"error\" -Recurse",
+    "description": "Finds text in strings and files, functioning similarly to grep on UNIX systems.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-Path", "meaning": "Specifies the path to the files to search." },
+      { "flag": "-Pattern", "meaning": "Specifies the text or regular expression to find." },
+      { "flag": "-Recurse", "meaning": "Searches in the specified directory and all its subdirectories." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "34",
+    "conceptId": "core-dev-extract-archive",
+    "command": "Expand-Archive -LiteralPath \".\\archive.zip\" -DestinationPath \".\\\"",
+    "description": "Extracts files from a specified zipped archive file to a specified destination folder.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-LiteralPath", "meaning": "Specifies the path to the archive file (does not interpret wildcard characters)." },
+      { "flag": "-DestinationPath", "meaning": "Specifies the path to the folder where you want the archive extracted." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "35",
+    "conceptId": "core-dev-env-vars",
+    "command": "Get-ChildItem Env:",
+    "description": "Retrieves the environment variables configured for the current PowerShell session by accessing the Env: drive.",
+    "category": "development-tools",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "36",
+    "conceptId": "core-util-clear-screen",
+    "command": "Clear-Host",
+    "description": "Clears the display in the host program, bringing the prompt to the top of the window.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "37",
+    "conceptId": "core-util-history",
+    "command": "Get-History",
+    "description": "Gets a list of the commands entered during the current PowerShell session.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "38",
+    "conceptId": "core-util-download-file",
+    "command": "Invoke-WebRequest -Uri \"https://example.com/file\" -OutFile \"filename.ext\"",
+    "description": "Gets content from a web page on the Internet and saves it directly to a local file.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-Uri", "meaning": "Specifies the URL of the file you want to download." },
+      { "flag": "-OutFile", "meaning": "Specifies the local path and file name to save the download as." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "39",
+    "conceptId": "core-util-manual",
+    "command": "Get-Help <command> -Detailed",
+    "description": "Displays information about PowerShell cmdlets and concepts, including detailed examples.",
+    "category": "other",
+    "flags": [
+      { "flag": "-Detailed", "meaning": "Adds parameter descriptions and concrete examples to the basic help display." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "40",
+    "conceptId": "core-util-tree-view",
+    "command": "tree /F",
+    "description": "Uses the native Windows tree utility inside PowerShell to display directory structures.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "/F", "meaning": "Displays the names of the files in each folder." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "41",
+    "conceptId": "misc-process-by-port",
+    "command": "Get-Process -Id (Get-NetTCPConnection -LocalPort 80).OwningProcess",
+    "description": "Retrieves the exact process object running on a specific local port using native PowerShell networking cmdlets.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-Id", "meaning": "Specifies the exact Process ID (PID) to retrieve." },
+      { "flag": "-LocalPort 80", "meaning": "Filters the TCP connections to only show those using local port 80." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "42",
+    "conceptId": "core-util-datetime",
+    "command": "Get-Date",
+    "description": "Gets a robust object representing the current date and time.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "43",
+    "conceptId": "misc-create-alias",
+    "command": "Set-Alias -Name \"<name>\" -Value \"<command>\"",
+    "description": "Creates or changes an alias (alternate name) for a cmdlet or command in the current session.",
+    "category": "other",
+    "flags": [
+      { "flag": "-Name", "meaning": "Specifies the new alias name." },
+      { "flag": "-Value", "meaning": "Specifies the name of the cmdlet or command being aliased." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "44",
+    "conceptId": "core-util-calendar",
+    "command": "Get-Date -UFormat \"%A %d %B %Y\"",
+    "description": "Displays a highly readable, UNIX-style formatted string representing the current day, date, and year.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "-UFormat", "meaning": "Displays the date and time in UNIX format." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "45",
+    "conceptId": "core-file-word-count",
+    "command": "Get-Content filename.txt | Measure-Object -Line",
+    "description": "Reads the content of a file and pipes it into a measurement object to count lines, words, and characters.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-Line", "meaning": "Counts the total number of lines." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "46",
+    "conceptId": "core-util-watch",
+    "command": "while ($true) { Clear-Host; <command>; Start-Sleep -Seconds 2 }",
+    "description": "Uses a native PowerShell while loop to continuously clear the screen and execute a command every 2 seconds.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "-Seconds 2", "meaning": "Specifies how long the script should pause (in seconds) before looping again." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "47",
+    "conceptId": "core-sec-random-password",
+    "command": "-join ((33..126) | Get-Random -Count 16 | ForEach-Object { [char]$_ })",
+    "description": "Generates a highly secure, 16-character random password using all printable ASCII characters (letters, numbers, and symbols).",
+    "category": "security",
+    "flags": [
+      { "flag": "-Count 16", "meaning": "Specifies the length of the generated password string." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "48",
+    "conceptId": "core-net-flushdns",
+    "command": "Clear-DnsClientCache",
+    "description": "Deletes all the contents of the DNS client cache using a native PowerShell cmdlet.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "49",
+    "conceptId": "core-util-base64",
+    "command": "[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes(\"text\"))",
+    "description": "Leverages the underlying .NET framework within PowerShell to accurately encode a UTF-8 string into Base64.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "50",
+    "conceptId": "core-net-default-gateway",
+    "command": "Get-NetRoute -DestinationPrefix \"0.0.0.0/0\" | Select-Object NextHop, InterfaceAlias",
+    "description": "Retrieves the default IP route and isolates the gateway IP address (NextHop) and the network adapter name.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-DestinationPrefix \"0.0.0.0/0\"", "meaning": "Filters the routing table for the universal default route." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "51",
+    "conceptId": "core-net-device-status",
+    "command": "Get-NetAdapter",
+    "description": "Retrieves the basic properties of all network adapters, including their physical status, MAC address, and link speed.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  }
+]

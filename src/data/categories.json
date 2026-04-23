@@ -1,0 +1,11 @@
+[
+    {"id": "file-system", "name": "File System"},
+    {"id": "process-management", "name": "Process Management"},
+    {"id": "user-management", "name": "User Management"},
+    {"id": "system-administration", "name": "System Administration"},
+    {"id": "security", "name": "Security"},
+    {"id": "networking", "name": "Networking"},
+    {"id": "development-tools", "name": "Development Tools"},
+    {"id": "utilities", "name": "Utilities"},
+    {"id": "other", "name": "Other"}
+]

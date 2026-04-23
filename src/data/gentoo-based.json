@@ -1,0 +1,542 @@
+[
+  {
+    "id": "1",
+    "conceptId": "core-print-working-dir",
+    "command": "pwd",
+    "description": "Print the full, absolute path of the current working directory.",
+    "category": "file-system",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "2",
+    "conceptId": "core-create-dir-tree",
+    "command": "mkdir -p folder/subfolder",
+    "description": "Create a directory, including any necessary parent directories that do not currently exist.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-p", "meaning": "No error if existing, make parent directories as needed." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "3",
+    "conceptId": "core-delete-dir-recursive",
+    "command": "rm -rf target_folder/",
+    "description": "Recursively and forcefully remove a directory and all of its contents without prompting.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-r", "meaning": "Remove directories and their contents recursively." },
+      { "flag": "-f", "meaning": "Force deletion; ignore nonexistent files and never prompt." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "4",
+    "conceptId": "core-find-file-name",
+    "command": "find . -name \"filename.txt\"",
+    "description": "Search the current directory and all subdirectories for a file with a specific name.",
+    "category": "file-system",
+    "flags": [
+      { "flag": ".", "meaning": "Start the search in the current directory." },
+      { "flag": "-name", "meaning": "Base of file name matches the specified pattern." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "5",
+    "conceptId": "core-view-file-contents",
+    "command": "cat filename.txt",
+    "description": "Read the contents of a file and print it directly to the terminal screen.",
+    "category": "file-system",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "6",
+    "conceptId": "core-monitor-processes",
+    "command": "top",
+    "description": "Display and update sorted information about processes in real-time.",
+    "category": "process-management",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "7",
+    "conceptId": "core-list-processes",
+    "command": "ps aux",
+    "description": "Display a static snapshot of all currently running processes across all users.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "a", "meaning": "Show processes for all users." },
+      { "flag": "u", "meaning": "Display the process's user/owner." },
+      { "flag": "x", "meaning": "Also show processes not attached to a terminal." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "8",
+    "conceptId": "core-kill-process-pid",
+    "command": "kill -9 <PID>",
+    "description": "Forcefully terminate a process using its numerical Process ID (PID).",
+    "category": "process-management",
+    "flags": [
+      { "flag": "-9", "meaning": "Sends the SIGKILL signal, forcing the process to terminate immediately without cleanup." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "9",
+    "conceptId": "core-kill-process-name",
+    "command": "killall -9 <process_name>",
+    "description": "Forcefully kill all instances of a process by its exact name.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "-9", "meaning": "Sends the SIGKILL signal to immediately terminate the matching processes." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "10",
+    "conceptId": "core-run-background",
+    "command": "./script.sh &",
+    "description": "Executes a command or script in the background, freeing up the current terminal prompt.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "&", "meaning": "Placed at the end of a command, it instructs the shell to run the job in the background." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "11",
+    "conceptId": "core-add-user",
+    "command": "sudo useradd -m <username>",
+    "description": "Create a new user account and automatically generate their home directory.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "-m", "meaning": "Create the user's home directory if it does not exist." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "12",
+    "conceptId": "core-change-password",
+    "command": "sudo passwd <username>",
+    "description": "Change or update the authentication token (password) for a specific user.",
+    "category": "user-management",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "13",
+    "conceptId": "core-switch-user",
+    "command": "su - <username>",
+    "description": "Switch the current terminal session to another user and load their environment variables.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "-", "meaning": "Start a login shell, loading the target user's profile and paths." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "14",
+    "conceptId": "core-list-users",
+    "command": "cat /etc/passwd",
+    "description": "Display the raw file containing all registered user accounts on the system.",
+    "category": "user-management",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "15",
+    "conceptId": "core-delete-user",
+    "command": "sudo userdel -r <username>",
+    "description": "Completely remove a user account and delete their home directory and mail spool.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "-r", "meaning": "Remove the user's home directory and files completely." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "16",
+    "conceptId": "core-sys-info",
+    "command": "uname -a",
+    "description": "Print comprehensive system information including kernel name, network node hostname, kernel release, and machine hardware name.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "-a", "meaning": "Print all available system information." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "17",
+    "conceptId": "core-disk-space",
+    "command": "df -h",
+    "description": "Report the amount of available disk space being used by file systems.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "-h", "meaning": "Print sizes in human-readable format (e.g., 1K, 234M, 2G)." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "18",
+    "conceptId": "core-uptime",
+    "command": "uptime",
+    "description": "Tell how long the system has been running, how many users are currently logged on, and the system load averages.",
+    "category": "system-administration",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "19",
+    "conceptId": "core-reboot",
+    "command": "sudo shutdown -r now",
+    "description": "Immediately halt the system and trigger a full reboot.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "-r", "meaning": "Requests that the system be rebooted after it has been brought down." },
+      { "flag": "now", "meaning": "Executes the shutdown sequence immediately without waiting." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "20",
+    "conceptId": "core-start-service",
+    "command": "sudo systemctl start <service_name>",
+    "description": "Start a specific system service or daemon (Note: macOS users utilize 'launchctl' instead of 'systemctl').",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "start", "meaning": "The systemd command to activate the target service." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "21",
+    "conceptId": "core-change-permissions",
+    "command": "chmod 755 <file_or_directory>",
+    "description": "Change the access permissions of a file or directory. 755 grants read/write/execute to the owner, and read/execute to everyone else.",
+    "category": "security",
+    "flags": [
+      { "flag": "755", "meaning": "Numeric representation of permissions: User (7 = rwx), Group (5 = r-x), Others (5 = r-x)." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "22",
+    "conceptId": "core-change-owner",
+    "command": "sudo chown <user>:<group> <file>",
+    "description": "Change the user and/or group ownership of a specific file or directory.",
+    "category": "security",
+    "flags": [
+      { "flag": ":<group>", "meaning": "Optional parameter to simultaneously change the group ownership alongside the user." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "23",
+    "conceptId": "core-elevate-privileges",
+    "command": "sudo -i",
+    "description": "Acquire a root shell environment. It runs the login shell as the target user (root by default).",
+    "category": "security",
+    "flags": [
+      { "flag": "-i", "meaning": "Simulates an initial login, reading the root user's profile and setting environmental variables accordingly." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "24",
+    "conceptId": "core-whoami",
+    "command": "whoami",
+    "description": "Print the effective user ID (username) of the current logged-in user. Useful for verifying privilege levels.",
+    "category": "security",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "25",
+    "conceptId": "core-generate-ssh-key",
+    "command": "ssh-keygen -t ed25519 -C \"your_email@example.com\"",
+    "description": "Generate a new SSH key pair for secure authentication to remote servers (e.g., GitHub, AWS). ed25519 is the modern secure standard.",
+    "category": "security",
+    "flags": [
+      { "flag": "-t ed25519", "meaning": "Specifies the type of key to create. Ed25519 is faster and more secure than legacy RSA." },
+      { "flag": "-C", "meaning": "Provides a comment (usually an email) to easily identify the key later." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "26",
+    "conceptId": "core-network-ping",
+    "command": "ping -c 4 <hostname>",
+    "description": "Send ICMP ECHO_REQUEST packets to network hosts to check connectivity. (Note: UNIX pings infinitely by default, so we limit it to 4).",
+    "category": "networking",
+    "flags": [
+      { "flag": "-c 4", "meaning": "Stop after sending exactly 4 ECHO_REQUEST packets." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "27",
+    "conceptId": "core-network-interfaces",
+    "command": "ifconfig -a",
+    "description": "View all active and inactive network interfaces, including local IP addresses and MAC addresses. (On newer Linux, 'ip a' is also used).",
+    "category": "networking",
+    "flags": [
+      { "flag": "-a", "meaning": "Display all interfaces which are currently available, even if they are down." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "28",
+    "conceptId": "core-network-trace",
+    "command": "traceroute <hostname>",
+    "description": "Print the route and measure transit delays of packets across an IP network.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "29",
+    "conceptId": "core-network-connections",
+    "command": "netstat -tuln",
+    "description": "Print active network connections, routing tables, and listening ports.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-t", "meaning": "Show TCP connections." },
+      { "flag": "-u", "meaning": "Show UDP connections." },
+      { "flag": "-l", "meaning": "Show only listening sockets." },
+      { "flag": "-n", "meaning": "Show numerical addresses instead of trying to determine symbolic host names." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "30",
+    "conceptId": "core-network-dns-lookup",
+    "command": "dig <domain>",
+    "description": "Perform highly detailed DNS (Domain Name System) lookups and query DNS name servers.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "31",
+    "conceptId": "core-dev-git-status",
+    "command": "git status",
+    "description": "Displays the state of the working directory and the staging area in a Git repository.",
+    "category": "development-tools",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "32",
+    "conceptId": "core-dev-http-request",
+    "command": "curl -i https://api.example.com",
+    "description": "Transfers data from or to a server using supported protocols, commonly used to test REST APIs.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-i", "meaning": "Include the HTTP response headers in the output." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "33",
+    "conceptId": "core-dev-search-logs",
+    "command": "grep -rnw \"error\" .",
+    "description": "Recursively searches through all files in the current directory for a specific text pattern.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-r", "meaning": "Search recursively down into all subdirectories." },
+      { "flag": "-n", "meaning": "Prefix each line of output with the 1-based line number within its input file." },
+      { "flag": "-w", "meaning": "Select only those lines containing matches that form whole words." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "34",
+    "conceptId": "core-dev-extract-archive",
+    "command": "tar -xzf archive.tar.gz",
+    "description": "Extracts the contents of a compressed gzip tarball archive into the current directory.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-x", "meaning": "Extract files from an archive." },
+      { "flag": "-z", "meaning": "Filter the archive through gzip (decompress)." },
+      { "flag": "-f", "meaning": "Use archive file or device ARCHIVE." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "35",
+    "conceptId": "core-dev-env-vars",
+    "command": "printenv",
+    "description": "Prints all or part of the environment variables currently loaded into the shell session.",
+    "category": "development-tools",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "36",
+    "conceptId": "core-util-clear-screen",
+    "command": "clear",
+    "description": "Clears the terminal screen, pushing previous output out of view to give you a clean workspace.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "37",
+    "conceptId": "core-util-history",
+    "command": "history",
+    "description": "Displays the command history list with line numbers, allowing you to see previously executed commands.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "38",
+    "conceptId": "core-util-download-file",
+    "command": "wget -O filename.ext \"https://example.com/file\"",
+    "description": "Downloads files from the web directly to the current directory using HTTP, HTTPS, or FTP.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-O", "meaning": "Specifies the exact output document name for the downloaded file." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "39",
+    "conceptId": "core-util-manual",
+    "command": "man <command>",
+    "description": "Formats and displays the system's official manual pages for a specific command.",
+    "category": "other",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "40",
+    "conceptId": "core-util-tree-view",
+    "command": "tree -L 2",
+    "description": "Lists the contents of directories in a tree-like format, making complex structures easy to read.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-L 2", "meaning": "Limits the maximum display depth of the directory tree to 2 levels down." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "41",
+    "conceptId": "misc-process-by-port",
+    "command": "sudo ss -lptn 'sport = :80'",
+    "description": "Displays the exact process (and PID) that is currently listening on a specific network port (e.g., port 80).",
+    "category": "networking",
+    "flags": [
+      { "flag": "-l", "meaning": "Display only listening sockets." },
+      { "flag": "-p", "meaning": "Show the process using the socket." },
+      { "flag": "-t", "meaning": "Display TCP sockets only." },
+      { "flag": "-n", "meaning": "Show numerical addresses instead of trying to resolve service names." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "42",
+    "conceptId": "core-util-datetime",
+    "command": "date",
+    "description": "Displays or sets the current system date and time in the terminal.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "43",
+    "conceptId": "misc-create-alias",
+    "command": "alias <name>=\"<command>\"",
+    "description": "Creates a temporary custom shortcut for a longer command. (Note: To make it permanent, add this line to your ~/.bashrc or ~/.zshrc file).",
+    "category": "other",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "44",
+    "conceptId": "core-util-calendar",
+    "command": "cal -3",
+    "description": "Displays a visual, formatted calendar grid of the current month in the terminal.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "-3", "meaning": "Display the previous, current, and next month side-by-side." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "45",
+    "conceptId": "core-file-word-count",
+    "command": "wc -l filename.txt",
+    "description": "Counts and displays the total number of lines in a file.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "-l", "meaning": "Print only the newline counts (total lines), ignoring words and bytes." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "46",
+    "conceptId": "core-util-watch",
+    "command": "watch -n 2 <command>",
+    "description": "Executes a program periodically, showing output in fullscreen to watch it change over time.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "-n 2", "meaning": "Specify the update interval in seconds (default is 2)." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "47",
+    "conceptId": "core-sec-random-password",
+    "command": "openssl rand -base64 16",
+    "description": "Generates a highly secure, cryptographically strong random password encoded in Base64.",
+    "category": "security",
+    "flags": [
+      { "flag": "-base64", "meaning": "Perform base64 encoding on the output so it can be copied as text." },
+      { "flag": "16", "meaning": "The number of random bytes to generate." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "48",
+    "conceptId": "core-net-flushdns",
+    "command": "sudo resolvectl flush-caches",
+    "description": "Clears the local DNS resolver cache on systemd-based Linux. (Note: On macOS, use 'sudo dscacheutil -flushcache').",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "49",
+    "conceptId": "core-util-base64",
+    "command": "echo \"text\" | base64",
+    "description": "Encodes standard text or files into a Base64 string, commonly used in web tokens and data transfers.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "50",
+    "conceptId": "core-net-default-gateway",
+    "command": "ip route show default",
+    "description": "Displays the default routing gateway and the primary network interface currently being used for outbound traffic. (Note: On macOS, use 'route -n get default').",
+    "category": "networking",
+    "flags": [
+      { "flag": "show default", "meaning": "Filters the routing table to only display the default 0.0.0.0 route." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "51",
+    "conceptId": "core-net-device-status",
+    "command": "nmcli device status",
+    "description": "Displays the current state and connection details of all network interfaces managed by NetworkManager.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  }
+]

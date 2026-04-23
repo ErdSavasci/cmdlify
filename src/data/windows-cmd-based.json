@@ -1,0 +1,545 @@
+[
+  {
+    "id": "1",
+    "conceptId": "core-print-working-dir",
+    "command": "cd",
+    "description": "Displays the name of the current directory. (In CMD, using cd without parameters prints the path).",
+    "category": "file-system",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "2",
+    "conceptId": "core-create-dir-tree",
+    "command": "mkdir folder\\subfolder",
+    "description": "Creates a directory tree. CMD automatically creates parent directories by default.",
+    "category": "file-system",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "3",
+    "conceptId": "core-delete-dir-recursive",
+    "command": "rmdir /s /q target_folder",
+    "description": "Removes a directory and all files and subdirectories within it, in quiet mode.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "/s", "meaning": "Removes all directories and files in the specified directory in addition to the directory itself." },
+      { "flag": "/q", "meaning": "Quiet mode, do not ask if ok to remove a directory tree with /s." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "4",
+    "conceptId": "core-find-file-name",
+    "command": "dir /s /b \"filename.txt\"",
+    "description": "Searches for a file in the current directory and all subdirectories.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "/s", "meaning": "Displays files in specified directory and all subdirectories." },
+      { "flag": "/b", "meaning": "Uses bare format (no heading information or summary)." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "5",
+    "conceptId": "core-view-file-contents",
+    "command": "type filename.txt",
+    "description": "Displays the contents of a text file on the screen.",
+    "category": "file-system",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "6",
+    "conceptId": "core-monitor-processes",
+    "command": "tasklist /v",
+    "description": "Displays a list of currently running processes with verbose information (does not auto-refresh).",
+    "category": "process-management",
+    "flags": [
+      { "flag": "/v", "meaning": "Specifies that verbose task information be displayed in the output." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "7",
+    "conceptId": "core-list-processes",
+    "command": "tasklist",
+    "description": "Displays a list of currently running processes on either a local or remote machine.",
+    "category": "process-management",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "8",
+    "conceptId": "core-kill-process-pid",
+    "command": "taskkill /PID <PID> /F",
+    "description": "Forcefully ends one or more tasks or processes using the Process ID.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "/PID", "meaning": "Specifies the process ID of the task to be terminated." },
+      { "flag": "/F", "meaning": "Forcefully terminates the process." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "9",
+    "conceptId": "core-kill-process-name",
+    "command": "taskkill /IM <process_name>.exe /F",
+    "description": "Forcefully terminates a process using its image (executable) name.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "/IM", "meaning": "Specifies the image name of the process to be terminated." },
+      { "flag": "/F", "meaning": "Forcefully terminates the process." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "10",
+    "conceptId": "core-run-background",
+    "command": "start /b command.exe",
+    "description": "Starts an application or script without opening a new Command Prompt window.",
+    "category": "process-management",
+    "flags": [
+      { "flag": "/b", "meaning": "Starts the application without opening a new window. CTRL+C will be ignored." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "11",
+    "conceptId": "core-add-user",
+    "command": "net user <username> <password> /add",
+    "description": "Creates a new local user account with a specified password.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "/add", "meaning": "Adds a user account to the local user accounts database." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "12",
+    "conceptId": "core-change-password",
+    "command": "net user <username> *",
+    "description": "Prompts the administrator to securely type a new password for the specified user.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "*", "meaning": "Produces a prompt for the password so it is not visible on the screen when typed." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "13",
+    "conceptId": "core-switch-user",
+    "command": "runas /user:<username> cmd",
+    "description": "Opens a new Command Prompt window running under the context of a different user.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "/user", "meaning": "Specifies the user account to use to run the program." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "14",
+    "conceptId": "core-list-users",
+    "command": "net user",
+    "description": "Displays a list of all user accounts configured on the computer.",
+    "category": "user-management",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "15",
+    "conceptId": "core-delete-user",
+    "command": "net user <username> /delete",
+    "description": "Permanently deletes a local user account from the system.",
+    "category": "user-management",
+    "flags": [
+      { "flag": "/delete", "meaning": "Removes the specified user account." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "16",
+    "conceptId": "core-sys-info",
+    "command": "systeminfo",
+    "description": "Displays detailed configuration information about the computer and its operating system, including hardware properties and installed updates.",
+    "category": "system-administration",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "17",
+    "conceptId": "core-disk-space",
+    "command": "wmic logicaldisk get size,freespace,caption",
+    "description": "Queries the Windows Management Instrumentation to display the total size and free space of all connected drives.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "get", "meaning": "Specifies exactly which properties to retrieve from the WMI logical disk query." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "18",
+    "conceptId": "core-uptime",
+    "command": "systeminfo | find \"System Boot Time\"",
+    "description": "Pipes the output of systeminfo into the find command to specifically isolate and display the exact date and time the system last booted.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "|", "meaning": "Pipes the output of the first command into the second command." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "19",
+    "conceptId": "core-reboot",
+    "command": "shutdown /r /t 0",
+    "description": "Forces the computer to immediately shut down and restart.",
+    "category": "system-administration",
+    "flags": [
+      { "flag": "/r", "meaning": "Full shutdown and restart of the computer." },
+      { "flag": "/t 0", "meaning": "Sets the time-out period before shutdown to zero seconds (immediate)." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "20",
+    "conceptId": "core-start-service",
+    "command": "net start \"<service_name>\"",
+    "description": "Starts a registered Windows network or system service from the command line.",
+    "category": "system-administration",
+    "flags": [],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "21",
+    "conceptId": "core-change-permissions",
+    "command": "icacls \"<file>\" /grant <Username>:F",
+    "description": "Modifies the Access Control List (ACL) of a file or folder to grant specific permissions to a user.",
+    "category": "security",
+    "flags": [
+      { "flag": "/grant", "meaning": "Grants specified user access rights. Permissions replace previously granted explicit permissions." },
+      { "flag": ":F", "meaning": "Grants Full Control access rights to the specified user." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "22",
+    "conceptId": "core-change-owner",
+    "command": "takeown /f \"<file>\"",
+    "description": "Enables an administrator to recover access to a file that was denied by re-assigning file ownership to the current user.",
+    "category": "security",
+    "flags": [
+      { "flag": "/f", "meaning": "Specifies the file name or directory name pattern to take ownership of." }
+    ],
+    "riskLevel": "warning"
+  },
+  {
+    "id": "23",
+    "conceptId": "core-elevate-privileges",
+    "command": "runas /user:Administrator cmd",
+    "description": "Executes the Command Prompt under the context of the local Administrator account (prompts for password).",
+    "category": "security",
+    "flags": [
+      { "flag": "/user:Administrator", "meaning": "Specifies the exact administrative account to run the process as." }
+    ],
+    "riskLevel": "danger"
+  },
+  {
+    "id": "24",
+    "conceptId": "core-whoami",
+    "command": "whoami /all",
+    "description": "Displays the user, group, and privileges information for the user who is currently logged on to the local system.",
+    "category": "security",
+    "flags": [
+      { "flag": "/all", "meaning": "Displays the current user name, group names, security identifiers (SID), and privileges." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "25",
+    "conceptId": "core-generate-ssh-key",
+    "command": "ssh-keygen -t ed25519 -C \"your_email@example.com\"",
+    "description": "Generates a new SSH key pair using Windows' native OpenSSH implementation for secure remote authentication.",
+    "category": "security",
+    "flags": [
+      { "flag": "-t ed25519", "meaning": "Specifies the modern, highly secure Ed25519 cryptographic algorithm." },
+      { "flag": "-C", "meaning": "Adds a descriptive comment to the public key file." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "26",
+    "conceptId": "core-network-ping",
+    "command": "ping <hostname>",
+    "description": "Verifies IP-level connectivity to another TCP/IP computer by sending Internet Control Message Protocol (ICMP) echo requests. Defaults to 4 requests.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "27",
+    "conceptId": "core-network-interfaces",
+    "command": "ipconfig /all",
+    "description": "Displays the full TCP/IP configuration for all network adapters, including DNS, MAC addresses, and IPv4/IPv6 details.",
+    "category": "networking",
+    "flags": [
+      { "flag": "/all", "meaning": "Displays the full configuration information. Without this, ipconfig displays only basic IP, subnet, and gateway data." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "28",
+    "conceptId": "core-network-trace",
+    "command": "tracert <hostname>",
+    "description": "Determines the path taken to a destination by sending ICMP Echo Request messages with incrementally increasing Time to Live (TTL) field values.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "29",
+    "conceptId": "core-network-connections",
+    "command": "netstat -ano",
+    "description": "Displays active TCP connections, ports on which the computer is listening, Ethernet statistics, and the PID of the process tying up the port.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-a", "meaning": "Displays all active connections and the TCP and UDP ports on which the computer is listening." },
+      { "flag": "-n", "meaning": "Displays active TCP connections, but addresses and port numbers are expressed numerically." },
+      { "flag": "-o", "meaning": "Displays active TCP connections and includes the process ID (PID) for each connection." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "30",
+    "conceptId": "core-network-dns-lookup",
+    "command": "nslookup <domain>",
+    "description": "Displays information that you can use to diagnose Domain Name System (DNS) infrastructure.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "31",
+    "conceptId": "core-dev-git-status",
+    "command": "git status",
+    "description": "Displays the state of the working directory and the staging area in a Git repository.",
+    "category": "development-tools",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "32",
+    "conceptId": "core-dev-http-request",
+    "command": "curl -i https://api.example.com",
+    "description": "Tests an HTTP endpoint. Native curl is available in Windows 10 build 17063 and later.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-i", "meaning": "Include the HTTP response headers in the output." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "33",
+    "conceptId": "core-dev-search-logs",
+    "command": "findstr /s /i /n \"error\" *.*",
+    "description": "Searches for patterns of text in files, commonly used for parsing log files for errors.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "/s", "meaning": "Searches for matching files in the current directory and all subdirectories." },
+      { "flag": "/i", "meaning": "Specifies that the search is not to be case-sensitive." },
+      { "flag": "/n", "meaning": "Prints the line number before each line that matches." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "34",
+    "conceptId": "core-dev-extract-archive",
+    "command": "tar -xf archive.zip",
+    "description": "Extracts the contents of a zip archive. Native tar is available in Windows 10 build 17063 and later.",
+    "category": "development-tools",
+    "flags": [
+      { "flag": "-x", "meaning": "Extract files from an archive." },
+      { "flag": "-f", "meaning": "Use archive file or device ARCHIVE." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "35",
+    "conceptId": "core-dev-env-vars",
+    "command": "set",
+    "description": "Displays, sets, or removes cmd.exe environment variables.",
+    "category": "development-tools",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "36",
+    "conceptId": "core-util-clear-screen",
+    "command": "cls",
+    "description": "Clears the command prompt window and screen buffer.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "37",
+    "conceptId": "core-util-history",
+    "command": "doskey /history",
+    "description": "Displays all commands stored in memory for the current command prompt session.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "/history", "meaning": "Outputs the list of previously typed commands." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "38",
+    "conceptId": "core-util-download-file",
+    "command": "curl -o filename.ext \"https://example.com/file\"",
+    "description": "Downloads a file using the native curl executable (available in modern Windows 10/11 CMD).",
+    "category": "networking",
+    "flags": [
+      { "flag": "-o", "meaning": "Writes the output to the specified file instead of standard output." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "39",
+    "conceptId": "core-util-manual",
+    "command": "help <command>",
+    "description": "Provides help information and syntax documentation for Windows commands.",
+    "category": "other",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "40",
+    "conceptId": "core-util-tree-view",
+    "command": "tree /F",
+    "description": "Graphically displays the folder structure of a drive or path.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "/F", "meaning": "Displays the names of the files in each folder in addition to the folder structure." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "41",
+    "conceptId": "misc-process-by-port",
+    "command": "netstat -ano | findstr :80",
+    "description": "Finds the Process ID (PID) listening on a specific network port by piping netstat output into the findstr tool.",
+    "category": "networking",
+    "flags": [
+      { "flag": "-a", "meaning": "Displays all active connections and listening ports." },
+      { "flag": "-n", "meaning": "Displays addresses and port numbers in numerical form." },
+      { "flag": "-o", "meaning": "Displays the owning process ID associated with each connection." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "42",
+    "conceptId": "core-util-datetime",
+    "command": "echo %date% %time%",
+    "description": "Prints the current system date and time to the console without prompting the user to enter a new one.",
+    "category": "utilities",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "43",
+    "conceptId": "misc-create-alias",
+    "command": "doskey <name>=<command>",
+    "description": "Creates a temporary macro/shortcut for a command in the current CMD session.",
+    "category": "other",
+    "flags": [],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "44",
+    "conceptId": "core-util-calendar",
+    "command": "powershell -c \"Get-Date\"",
+    "description": "CMD lacks a native visual calendar grid, so this invokes PowerShell to print a formatted current date and time.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "-c", "meaning": "Executes the specified string as a command and then instantly exits the PowerShell session." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "45",
+    "conceptId": "core-file-word-count",
+    "command": "find /c /v \"\" filename.txt",
+    "description": "Counts the number of lines in a file by searching for all lines that do not contain an empty string.",
+    "category": "file-system",
+    "flags": [
+      { "flag": "/c", "meaning": "Displays only the count of lines containing the string." },
+      { "flag": "/v", "meaning": "Displays all lines NOT containing the specified string." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "46",
+    "conceptId": "core-util-watch",
+    "command": "for /l %g in () do @(cls & <command> & timeout /t 2 >nul)",
+    "description": "Creates an infinite loop in CMD to clear the screen, run a command, and wait 2 seconds, simulating the UNIX 'watch' tool.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "timeout /t 2", "meaning": "Pauses the execution of the loop for 2 seconds before repeating." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "47",
+    "conceptId": "core-sec-random-password",
+    "command": "powershell -Command \"[guid]::NewGuid().ToString()\"",
+    "description": "CMD lacks a strong native crypto generator, so this invokes PowerShell to generate a secure random GUID string.",
+    "category": "security",
+    "flags": [
+      { "flag": "-Command", "meaning": "Executes the specified commands as though they were typed at the PowerShell prompt." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "48",
+    "conceptId": "core-net-flushdns",
+    "command": "ipconfig /flushdns",
+    "description": "Flushes and resets the contents of the DNS client resolver cache. Essential for fixing local network mapping issues.",
+    "category": "networking",
+    "flags": [
+      { "flag": "/flushdns", "meaning": "The specific flag that purges the DNS cache." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "49",
+    "conceptId": "core-util-base64",
+    "command": "certutil -encode input.txt output.b64",
+    "description": "Uses the native Windows Certificate Utility to encode the contents of a text file into Base64 format.",
+    "category": "utilities",
+    "flags": [
+      { "flag": "-encode", "meaning": "Encodes a file to Base64 format." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "50",
+    "conceptId": "core-net-default-gateway",
+    "command": "route print 0.0.0.0",
+    "description": "Prints the network routing table, specifically filtered to show the default gateway route.",
+    "category": "networking",
+    "flags": [
+      { "flag": "print", "meaning": "Tells the route command to display the routing table." },
+      { "flag": "0.0.0.0", "meaning": "Filters the print command to only show the default network destination." }
+    ],
+    "riskLevel": "safe"
+  },
+  {
+    "id": "51",
+    "conceptId": "core-net-device-status",
+    "command": "netsh interface show interface",
+    "description": "Displays a table listing all local network interfaces and their administrative and connection states.",
+    "category": "networking",
+    "flags": [],
+    "riskLevel": "safe"
+  }
+]
