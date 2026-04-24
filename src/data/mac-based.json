@@ -507,7 +507,9 @@
     "command": "sudo resolvectl flush-caches",
     "description": "Clears the local DNS resolver cache on systemd-based Linux. (Note: On macOS, use 'sudo dscacheutil -flushcache').",
     "category": "networking",
-    "flags": [],
+    "flags": [
+      { "flag": "flush-caches", "meaning": "Instructs resolvectl to clear all cached DNS records." }
+    ],
     "riskLevel": "safe"
   },
   {
@@ -538,5 +540,21 @@
     "category": "networking",
     "flags": [],
     "riskLevel": "safe"
+  },
+  {
+    "id": "52",
+    "conceptId": "install-package",
+    "category": "package-management",
+    "command": "brew install <package>",
+    "description": "Downloads and installs a package using the Homebrew package manager.",
+    "flags": []
+  },
+  {
+    "id": "53",
+    "conceptId": "search-package",
+    "category": "package-management",
+    "command": "brew search <query>",
+    "description": "Searches Homebrew for a specific software package or cask.",
+    "flags": []
   }
 ]

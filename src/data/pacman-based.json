@@ -507,7 +507,9 @@
     "command": "sudo resolvectl flush-caches",
     "description": "Clears the local DNS resolver cache on systemd-based Linux. (Note: On macOS, use 'sudo dscacheutil -flushcache').",
     "category": "networking",
-    "flags": [],
+    "flags": [
+      { "flag": "flush-caches", "meaning": "Instructs resolvectl to clear all cached DNS records." }
+    ],
     "riskLevel": "safe"
   },
   {
@@ -538,5 +540,25 @@
     "category": "networking",
     "flags": [],
     "riskLevel": "safe"
+  },
+  {
+    "id": "52",
+    "conceptId": "install-package",
+    "category": "package-management",
+    "command": "sudo pacman -S <package>",
+    "description": "Synchronizes and installs a package from the official Arch repositories.",
+    "flags": [
+      { "flag": "-S", "meaning": "Sync mode: installs the specified package." }
+    ]
+  },
+  {
+    "id": "53",
+    "conceptId": "search-package",
+    "category": "package-management",
+    "command": "pacman -Ss <query>",
+    "description": "Searches the repository databases for a specific package.",
+    "flags": [
+      { "flag": "-Ss", "meaning": "Sync mode + search operation." }
+    ]
   }
 ]

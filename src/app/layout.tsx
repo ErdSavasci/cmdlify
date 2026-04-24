@@ -13,9 +13,61 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  //This tells Next.js the root domain for all social images and canonical links
+  metadataBase: new URL("https://cmdlify.com"),
   title: "Cmdlify - Simplify Your Terminal Experience",
   description:
     "A comprehensive, cross-OS terminal command reference for macOS, Linux, and Windows.",
+  keywords: [
+    "terminal",
+    "command line",
+    "CLI",
+    "linux commands",
+    "macos terminal",
+    "windows cmd",
+    "powershell",
+    "bash",
+    "zsh",
+    "developer tools",
+    "command cheat sheet",
+    "cmdlify",
+  ],
+  authors: [{ name: "VirtuEng Software", url: "https://www.virtue.ng" }],
+  creator: "VirtuEng Software",
+  publisher: "VirtuEng Software",
+
+  // Canonical URL prevents duplicate content penalties if your site is accessed via http vs https
+  alternates: {
+    canonical: "/",
+  },
+
+  // OpenGraph controls how your site looks when shared on Discord, LinkedIn, iMessage, etc.
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    title: "Cmdlify - Simplify Your Terminal Experience",
+    description:
+      "A comprehensive, cross-OS terminal command reference for macOS, Linux, and Windows.",
+    siteName: "Cmdlify",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Cmdlify - Simplify Your Terminal Experience",
+      },
+    ],
+  },
+
+  // Twitter Card metadata
+  twitter: {
+    card: "summary_large_image",
+    title: "Cmdlify - Simplify Your Terminal Experience",
+    description:
+      "A comprehensive, cross-OS terminal command reference for macOS, Linux, and Windows.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

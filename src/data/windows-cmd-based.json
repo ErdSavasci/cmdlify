@@ -541,5 +541,21 @@
     "category": "networking",
     "flags": [],
     "riskLevel": "safe"
+  },
+  {
+    "id": "52",
+    "conceptId": "install-package",
+    "category": "package-management",
+    "command": "winget install <package>",
+    "description": "Installs a software application using the Windows Package Manager.",
+    "flags": []
+  },
+  {
+    "id": "53",
+    "conceptId": "search-package",
+    "category": "package-management",
+    "command": "winget search <query>",
+    "description": "Searches the Windows Package Manager repository for software.",
+    "flags": []
   }
 ]

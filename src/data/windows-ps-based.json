@@ -544,5 +544,25 @@
     "category": "networking",
     "flags": [],
     "riskLevel": "safe"
+  },
+  {
+    "id": "52",
+    "conceptId": "install-package",
+    "category": "package-management",
+    "command": "Install-Package -Name <package>",
+    "description": "Installs a software package using PowerShell's built-in PackageManagement module.",
+    "flags": [
+      { "flag": "-Name", "meaning": "Specifies the exact name of the package to install." }
+    ]
+  },
+  {
+    "id": "53",
+    "conceptId": "search-package",
+    "category": "package-management",
+    "command": "Find-Package -Name <query>",
+    "description": "Finds software packages in available package sources.",
+    "flags": [
+      { "flag": "-Name", "meaning": "The string to search for in the repository." }
+    ]
   }
 ]

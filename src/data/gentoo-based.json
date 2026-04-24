@@ -507,7 +507,9 @@
     "command": "sudo resolvectl flush-caches",
     "description": "Clears the local DNS resolver cache on systemd-based Linux. (Note: On macOS, use 'sudo dscacheutil -flushcache').",
     "category": "networking",
-    "flags": [],
+    "flags": [
+      { "flag": "flush-caches", "meaning": "Instructs resolvectl to clear all cached DNS records." }
+    ],
     "riskLevel": "safe"
   },
   {
@@ -538,5 +540,25 @@
     "category": "networking",
     "flags": [],
     "riskLevel": "safe"
+  },
+  {
+    "id": "52",
+    "conceptId": "install-package",
+    "category": "package-management",
+    "command": "sudo emerge -a <package>",
+    "description": "Compiles and installs a package from source using Portage.",
+    "flags": [
+      { "flag": "-a", "meaning": "(--ask) Prompts for confirmation before modifying the system." }
+    ]
+  },
+  {
+    "id": "53",
+    "conceptId": "search-package",
+    "category": "package-management",
+    "command": "emerge --search <query>",
+    "description": "Searches the Portage tree for matching software packages.",
+    "flags": [
+      { "flag": "--search", "meaning": "(or -S) Searches for packages by name." }
+    ]
   }
 ]

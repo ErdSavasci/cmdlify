@@ -31,12 +31,12 @@ import windowsps from "@/data/windows-ps-based.json";
 import categories from "@/data/categories.json";
 
 const osOptions = [
-  { id: "macos", name: "macOS", icon: SiApple },
   { id: "debian", name: "Debian/Ubuntu", icon: SiDebian },
   { id: "rpm", name: "RHEL/CentOS/Fedora", icon: SiRedhat },
   { id: "pacman", name: "Arch Linux", icon: SiArchlinux },
   { id: "gentoo", name: "Gentoo", icon: SiGentoo },
   { id: "slackware", name: "Slackware", icon: SiSlackware },
+  { id: "macos", name: "macOS", icon: SiApple },
   { id: "ps", name: "Windows PowerShell", icon: VscTerminalPowershell },
   { id: "cmd", name: "Windows CMD", icon: FaWindows },
 ];
@@ -69,6 +69,25 @@ const getOSPrefix = (osId: string) => {
       return "cmdlify@linux:~$";
     default:
       return "$";
+  }
+};
+
+// Helper function to return colors for the striped footer
+const getRiskData = (risk?: string) => {
+  switch (risk?.toLowerCase()) {
+    case "danger":
+      return { textClass: "text-red-600 dark:text-red-500", hex: "#ef4444" };
+    case "warning":
+      return {
+        textClass: "text-orange-600 dark:text-orange-500",
+        hex: "#f97316",
+      };
+    case "safe":
+    default:
+      return {
+        textClass: "text-green-600 dark:text-green-500",
+        hex: "#22c55e",
+      };
   }
 };
 
@@ -284,6 +303,11 @@ export default function Home() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  // Handle refreshing the page when clicking the logo
+  const handleRefreshPage = () => {
+    globalThis.location.href = "/";
+  };
+
   // Handle changing the OS for a specific command block
   const handleBlockOSChange = (conceptId: string, newOS: string) => {
     setBlockOSOverrides((prev) => ({
@@ -304,7 +328,7 @@ export default function Home() {
       {/* Main Content: Add z-10 and relative to sit above particles */}
       <main className="p-10 max-w-5xl mx-auto relative z-10 transition-colors duration-300 min-h-screen">
         {/* --- Theme Toggle --- */}
-        <div className="absolute top-13 right-10 z-99">
+        <div className="absolute top-12.5 right-10 z-99">
           <button
             onClick={toggleTheme}
             className="cursor-pointer p-2.5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors shadow-sm"
@@ -327,7 +351,8 @@ export default function Home() {
               alt="Cmdlify Logo"
               width={128}
               height={128}
-              className="w-12 h-12 md:w-16 md:h-16 rounded-full shadow-[0_0_15px_rgba(74,222,128,0.3)] border border-gray-800"
+              onClick={handleRefreshPage}
+              className="cursor-pointer w-12 h-12 md:w-16 md:h-16 rounded-full shadow-[0_0_15px_rgba(74,222,128,0.3)] border border-gray-800"
             />
 
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center">
@@ -477,7 +502,7 @@ export default function Home() {
 
                   {/* Command Line */}
                   <div className="bg-gray-50 dark:bg-black p-4 rounded-md mb-4 flex items-center justify-between group border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    <code className="text-lg text-gray-900 dark:text-white font-mono flex items-center overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide">
+                    <code className="text-lg text-gray-900 dark:text-white font-mono flex items-center overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide [font-variant-ligatures:none]">
                       {/* The OS Prefix with an added non-breaking space */}
                       <span className="text-gray-400 dark:text-gray-500 select-none shrink-0 text-sm">
                         {getOSPrefix(activeOS)}&nbsp;
@@ -499,11 +524,11 @@ export default function Home() {
                     {displayCmd.description}
                   </p>
 
-                  {/* Flags */}
+                  {/* Flags & Arguments */}
                   {displayCmd.flags && displayCmd.flags.length > 0 && (
                     <div className="mt-4 border-t border-gray-200 dark:border-gray-800 pt-4">
                       <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 block">
-                        Flags Explained
+                        Flags & Arguments
                       </span>
                       <ul className="space-y-2">
                         {displayCmd.flags.map((f) => (
@@ -522,6 +547,26 @@ export default function Home() {
                       </ul>
                     </div>
                   )}
+
+                  {/* Striped Risk Level Footer */}
+                  <div className="mt-8 relative -mx-6 -mb-6 h-12 flex items-center justify-center rounded-b-lg overflow-hidden border-t border-transparent dark:border-gray-800/50">
+                    {/* The striped background overlay */}
+                    <div
+                      className="absolute inset-0 risk-stripes pointer-events-none"
+                      style={
+                        {
+                          "--risk-color": getRiskData(displayCmd.riskLevel).hex,
+                        } as React.CSSProperties
+                      }
+                    />
+
+                    {/* The text sitting on top */}
+                    <span
+                      className={`relative z-10 text-[11px] font-bold uppercase tracking-widest ${getRiskData(displayCmd.riskLevel).textClass}`}
+                    >
+                      {displayCmd.riskLevel || "safe"}
+                    </span>
+                  </div>
                 </div>
               );
             })

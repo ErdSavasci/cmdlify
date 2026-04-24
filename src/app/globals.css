@@ -12,3 +12,16 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Custom utility for the dynamic risk level footer */
+.risk-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, transparent, var(--risk-color) 7%),
+    color-mix(in srgb, transparent, var(--risk-color) 7%) 6px,
+    color-mix(in srgb, transparent, var(--risk-color) 11%) 6px,
+    color-mix(in srgb, transparent, var(--risk-color) 11%) 12px
+  );
+  mask-image: linear-gradient(transparent 0%, black 100%);
+  -webkit-mask-image: linear-gradient(transparent 0%, black 100%);
+}
