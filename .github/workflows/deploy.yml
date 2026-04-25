@@ -17,5 +17,4 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /home/wasadmin/019-CMDLIFY
-            ./update.sh
+            whoami
