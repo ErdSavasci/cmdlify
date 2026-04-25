@@ -17,7 +17,7 @@ if pm2 describe cmdlify > /dev/null; then
   pm2 restart cmdlify
 else
   echo "PM2 process not found. Starting cmdlify for the first time..."
-  pm2 start npm --name "cmdlify" -- start
+  pm2 start npm --name "cmdlify" -- start -- -p 3100
 fi
 
 # 5. Save the PM2 list so it restarts automatically if the server reboots

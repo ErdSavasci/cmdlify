@@ -1,5 +1,7 @@
 # Cmdlify
 
+<img alt="Cmdlify" src="public/logo.png" width="200" height="200"/>
+
 ## Simplify Your Terminal Experience
 
 This website is made for you, to make terminal experience better. Since, we are using dozens of commands everyday, memorizing them is really hard. I wanted to keep them in one place, and by filtering/searching, I thought we can feel more comfortable and we will not feel the need of writing major commands down all the time.
