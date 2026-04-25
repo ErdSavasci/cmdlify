@@ -1,0 +1,21 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main  # This triggers the action only when pushing to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH into VPS and deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /home/wasadmin/019-CMDLIFY/cmdlify-app
+            ./update.sh
