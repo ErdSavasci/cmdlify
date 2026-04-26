@@ -478,7 +478,7 @@ export default function Home() {
                   key={displayCmd.conceptId}
                   id={`cmd-${displayCmd.conceptId}`} // For smooth scrolling from search results
                   // Adding 'relative' and dynamically apply 'z-50' if open, 'z-10' if closed
-                  className={`bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-lg p-6 shadow-xl transition-all relative ${
+                  className={`bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-lg p-4 sm:p-6 shadow-xl transition-all relative w-full ${
                     isDropdownOpen ? "z-50" : "z-10"
                   }`}
                 >
@@ -500,16 +500,14 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* Command Line */}
-                  <div className="w-full bg-gray-50 dark:bg-black p-4 rounded-md mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    {/* The Quarantine Wrapper - Stops the zoom Bug */}
-                    <div className="w-full min-w-0 overflow-x-auto scrollbar-hide pb-2 sm:pb-0">
-                      <code className="text-sm sm:text-lg text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none]">
-                        {/* The OS Prefix */}
+                  {/* Command Line (Flexbox Blowout Fix) */}
+                  <div className="w-full bg-gray-50 dark:bg-black p-3 sm:p-4 rounded-md mb-4 border border-gray-200 dark:border-gray-800">
+                    {/* Independent Scrolling Container */}
+                    <div className="w-full overflow-x-auto scrollbar-hide mb-3 pb-1 border-b border-gray-200 dark:border-gray-800 sm:border-none sm:mb-0 sm:pb-0">
+                      <code className="block text-sm sm:text-lg text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none] min-w-max">
                         <span className="text-gray-400 dark:text-gray-500 select-none text-xs sm:text-sm">
                           {getOSPrefix(activeOS)}&nbsp;
                         </span>
-                        {/* The actual command */}
                         <span>{displayCmd.command}</span>
                       </code>
                     </div>
@@ -518,10 +516,12 @@ export default function Home() {
                       onClick={() =>
                         handleCopy(displayCmd.id, displayCmd.command)
                       }
-                      className="shrink-0 cursor-pointer text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-3 py-1.5 rounded transition-all font-sans text-gray-700 dark:text-gray-300 min-w-[80px] w-full sm:w-auto text-center"
+                      className="w-full sm:w-auto sm:float-right cursor-pointer text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded transition-all font-sans text-gray-700 dark:text-gray-300 font-medium"
                     >
                       {copiedId === displayCmd.id ? "Copied!" : "Copy"}
                     </button>
+                    {/* Clearfix for the float on desktop */}
+                    <div className="clear-both hidden sm:block"></div>
                   </div>
 
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
@@ -553,7 +553,7 @@ export default function Home() {
                   )}
 
                   {/* Striped Risk Level Footer */}
-                  <div className="mt-8 relative -mx-6 -mb-6 h-12 flex items-center justify-center rounded-b-lg overflow-hidden border-t border-transparent dark:border-gray-800/50">
+                  <div className="mt-6 sm:mt-8 relative -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 h-10 sm:h-12 flex items-center justify-center rounded-b-lg overflow-hidden border-t border-transparent dark:border-gray-800/50">
                     {/* The striped background overlay */}
                     <div
                       className="absolute inset-0 risk-stripes pointer-events-none"
