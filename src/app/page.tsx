@@ -325,7 +325,7 @@ export default function Home() {
       <TerminalParticles />
 
       {/* Main Content: Add z-10 and relative to sit above particles */}
-      <main className="p-4 sm:p-6 md:p-10 max-w-5xl mx-auto relative z-10 transition-colors duration-300 min-h-screen">
+      <main className="p-4 sm:p-6 md:p-10 w-full max-w-[100vw] overflow-x-hidden max-w-5xl mx-auto relative z-10 transition-colors duration-300 min-h-screen">
         {/* --- Theme Toggle --- */}
         <div className="fixed top-4 right-4 md:top-8 md:right-8 z-[100]">
           <button
@@ -443,13 +443,13 @@ export default function Home() {
           )}
         </div>
 
-        {/* Category Tabs - Now a swipeable horizontal row on mobile */}
-        <div className="flex overflow-x-auto gap-2 mb-8 border-b border-gray-800 pb-4 w-full scrollbar-hide">
+        {/* Category Tabs - Wrapped and mathematically locked so they never shift */}
+        <div className="flex flex-wrap gap-2 mb-8 border-b border-gray-800 pb-4 w-full">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`cursor-pointer px-4 py-2 rounded-md text-sm font-medium transition-all shrink-0 whitespace-nowrap ${
+              className={`cursor-pointer px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 selectedCategory === cat.id
                   ? "bg-white dark:bg-gray-800 text-green-600 dark:text-green-400 shadow-sm border border-green-200 dark:border-green-900/50 bg-green-50/50"
                   : "bg-transparent text-gray-600 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-900 border border-transparent"
@@ -511,12 +511,12 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* Command Line - Strictly Constrained */}
-                  <div className="w-full max-w-full bg-gray-50 dark:bg-black p-3 sm:p-4 rounded-md mb-4 border border-gray-200 dark:border-gray-800">
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      {/* The Code Container */}
-                      <div className="w-full overflow-x-auto scrollbar-hide pb-2 sm:pb-0">
-                        <code className="inline-block text-sm sm:text-base text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none] pr-4">
+                  {/* Command Line - The Grid Fix */}
+                  <div className="grid grid-cols-1 bg-gray-50 dark:bg-black p-3 sm:p-4 rounded-md mb-4 border border-gray-200 dark:border-gray-800 w-full">
+                    <div className="flex flex-col sm:flex-row gap-3 w-full">
+                      {/* The Code Container - min-w-0 is the magic key */}
+                      <div className="flex-1 min-w-0 w-full overflow-x-auto scrollbar-hide pb-2 sm:pb-0">
+                        <code className="text-sm sm:text-base text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none] pr-4">
                           <span className="text-gray-400 dark:text-gray-500 select-none text-xs sm:text-sm">
                             {getOSPrefix(activeOS)}&nbsp;
                           </span>
