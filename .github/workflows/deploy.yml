@@ -20,12 +20,20 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keygen -y -f ~/.ssh/id_rsa > /dev/null && echo "Private key is valid" || (echo "Invalid private key format" && exit 1)
 
+      - name: Prepare SSH key
+        id: prep_key
+        shell: bash
+        run: |
+          echo "${{ secrets.VPS_SSH_KEY_B64 }}" | base64 -d > /tmp/vps_key
+          chmod 600 /tmp/vps_key
+          ssh-keygen -y -f /tmp/vps_key > /dev/null
+
       - name: SSH into VPS and deploy
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          key_path: /tmp/vps_key
           debug: true
           script_stop: true
           script: |
