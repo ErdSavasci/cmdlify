@@ -15,7 +15,6 @@ const geistMono = Geist_Mono({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1, // This specifically prevents the "zoom on focus" bug on mobile Safari
 };
 
 export const metadata: Metadata = {

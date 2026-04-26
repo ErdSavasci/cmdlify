@@ -138,8 +138,7 @@ const OSDropdown = ({
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => onToggle(!isOpen)}
-        // Replaced min-w-[180px] with w-[200px] here:
-        className="cursor-pointer flex items-center gap-2 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded hover:border-gray-400 dark:hover:border-gray-500 focus:ring-1 focus:ring-green-500 px-3 py-1.5 outline-none font-mono w-[200px] justify-between transition-colors"
+        className="cursor-pointer flex items-center gap-2 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded hover:border-gray-400 dark:hover:border-gray-500 focus:ring-1 focus:ring-green-500 px-3 py-1.5 outline-none font-mono w-full sm:w-[200px] justify-between transition-colors"
       >
         <div className="flex items-center gap-2">
           <Icon className="text-sm shrink-0" />
@@ -373,7 +372,7 @@ export default function Home() {
               <span style={{ fontSize: "0.65rem" }}>
                 Last Updated:{" "}
                 {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"}
-                {" (v1.0.1)"}
+                {" (v1.1)"}
               </span>
             </div>
           </div>
@@ -439,9 +438,9 @@ export default function Home() {
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`cursor-pointer px-4 py-2 rounded-md text-sm transition-all ${
+              className={`cursor-pointer px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 selectedCategory === cat.id
-                  ? "bg-white dark:bg-gray-800 text-green-600 dark:text-green-400 font-bold shadow-sm border border-gray-200 dark:border-transparent"
+                  ? "bg-white dark:bg-gray-800 text-green-600 dark:text-green-400 shadow-sm border border-green-200 dark:border-green-900/50 bg-green-50/50"
                   : "bg-transparent text-gray-600 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-900 border border-transparent"
               }`}
             >
