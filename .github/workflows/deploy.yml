@@ -14,11 +14,11 @@ jobs:
         shell: bash
         run: |
           mkdir -p ~/.ssh
-          cat > ~/.ssh/id_rsa <<'EOF'
+          cat > ~/.ssh/id_ed25519 <<'EOF'
           ${{ secrets.VPS_SSH_KEY }}
           EOF
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keygen -y -f ~/.ssh/id_rsa > /dev/null && echo "Private key is valid" || (echo "Invalid private key format" && exit 1)
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keygen -y -f ~/.ssh/id_ed25519 > /dev/null && echo "Private key is valid" || (echo "Invalid private key format" && exit 1)
 
       - name: Prepare SSH key
         id: prep_key
@@ -31,9 +31,9 @@ jobs:
       - name: SSH into VPS and deploy
         uses: appleboy/ssh-action@v1.2.5
         with:
-          host: 198.7.122.221
-          username: wasadmin
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key_path: /tmp/vps_key
           debug: true
           script: |
             cd /home/wasadmin/019-CMDLIFY
