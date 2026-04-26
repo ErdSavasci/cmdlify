@@ -21,7 +21,7 @@ jobs:
           ssh-keygen -y -f ~/.ssh/id_rsa > /dev/null && echo "Private key is valid" || (echo "Invalid private key format" && exit 1)
 
       - name: SSH into VPS and deploy
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USERNAME }}
