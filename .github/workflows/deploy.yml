@@ -37,4 +37,5 @@ jobs:
           debug: true
           script: |
             cd /home/wasadmin/019-CMDLIFY
+            chmod +x ./update.sh
             ./update.sh
