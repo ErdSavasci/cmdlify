@@ -31,9 +31,10 @@ jobs:
       - name: SSH into VPS and deploy
         uses: appleboy/ssh-action@v1.2.5
         with:
-          host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
+          host: 198.7.122.221
+          username: wasadmin
           key_path: /tmp/vps_key
           debug: true
           script: |
-            whoami
+            cd /home/wasadmin/019-CMDLIFY
+            ./update.sh
