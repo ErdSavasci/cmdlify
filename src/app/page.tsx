@@ -326,7 +326,7 @@ export default function Home() {
       <TerminalParticles />
 
       {/* Main Content: Add z-10 and relative to sit above particles */}
-      <main className="p-10 max-w-5xl mx-auto relative z-10 transition-colors duration-300 min-h-screen">
+      <main className="p-4 sm:p-6 md:p-10 max-w-5xl mx-auto relative z-10 transition-colors duration-300 min-h-screen">
         {/* --- Theme Toggle --- */}
         <div className="absolute top-12.5 right-10 z-99">
           <button
@@ -344,7 +344,7 @@ export default function Home() {
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           {/* Logo and Title Container */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             {/* The Logo with a subtle neon glow effect */}
             <Image
               src={"/logo.png"}
@@ -373,6 +373,7 @@ export default function Home() {
               <span style={{ fontSize: "0.65rem" }}>
                 Last Updated:{" "}
                 {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"}
+                {" (v1.0.1)"}
               </span>
             </div>
           </div>
@@ -482,7 +483,7 @@ export default function Home() {
                     isDropdownOpen ? "z-50" : "z-10"
                   }`}
                 >
-                  <div className="flex justify-between items-center mb-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
                     <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 dark:bg-gray-800 text-green-700 dark:text-green-400 border border-green-200 dark:border-gray-700">
                       {categoryName}
                     </span>
@@ -501,8 +502,8 @@ export default function Home() {
                   </div>
 
                   {/* Command Line */}
-                  <div className="bg-gray-50 dark:bg-black p-4 rounded-md mb-4 flex items-center justify-between group border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    <code className="text-lg text-gray-900 dark:text-white font-mono flex items-center overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide [font-variant-ligatures:none]">
+                  <div className="bg-gray-50 dark:bg-black p-4 rounded-md mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 group border border-gray-200 dark:border-gray-800 overflow-hidden">
+                    <code className="flex-1 w-full min-w-0 text-lg text-gray-900 dark:text-white font-mono flex items-center overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide [font-variant-ligatures:none]">
                       {/* The OS Prefix with an added non-breaking space */}
                       <span className="text-gray-400 dark:text-gray-500 select-none shrink-0 text-sm">
                         {getOSPrefix(activeOS)}&nbsp;
