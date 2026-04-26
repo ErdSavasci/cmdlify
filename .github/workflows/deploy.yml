@@ -32,7 +32,7 @@ jobs:
         uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.VPS_IP }}
-          username: wasadmin
+          username: ${{ secrets.VPS_USERNAME }}
           key_path: /tmp/vps_key
           debug: true
           script: |
