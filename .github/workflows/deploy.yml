@@ -33,7 +33,7 @@ jobs:
         with:
           host: 198.7.122.221
           username: wasadmin
-          key_path: /tmp/vps_key
+          key: ${{ secrets.VPS_SSH_KEY }}
           debug: true
           script: |
             cd /home/wasadmin/019-CMDLIFY
