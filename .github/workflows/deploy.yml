@@ -26,5 +26,7 @@ jobs:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          debug: true
+          script_stop: true
           script: |
             whoami
