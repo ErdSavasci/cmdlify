@@ -327,7 +327,7 @@ export default function Home() {
       {/* Main Content: Add z-10 and relative to sit above particles */}
       <main className="p-4 sm:p-6 md:p-10 max-w-5xl mx-auto relative z-10 transition-colors duration-300 min-h-screen">
         {/* --- Theme Toggle --- */}
-        <div className="absolute top-12.5 right-10 z-99">
+        <div className="fixed top-4 right-4 md:top-8 md:right-8 z-[100]">
           <button
             onClick={toggleTheme}
             className="cursor-pointer p-2.5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors shadow-sm"
@@ -369,7 +369,7 @@ export default function Home() {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
               </div>
 
-              <span style={{ fontSize: "0.65rem" }}>
+              <span className="truncate" style={{ fontSize: "0.65rem" }}>
                 Last Updated:{" "}
                 {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"}
                 {" (v1.1)"}
@@ -501,20 +501,24 @@ export default function Home() {
                   </div>
 
                   {/* Command Line */}
-                  <div className="bg-gray-50 dark:bg-black p-4 rounded-md mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 group border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    <code className="flex-1 w-full min-w-0 text-lg text-gray-900 dark:text-white font-mono flex items-center overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide [font-variant-ligatures:none]">
-                      {/* The OS Prefix with an added non-breaking space */}
-                      <span className="text-gray-400 dark:text-gray-500 select-none shrink-0 text-sm">
-                        {getOSPrefix(activeOS)}&nbsp;
-                      </span>
-                      {/* The actual command */}
-                      <span>{displayCmd.command}</span>
-                    </code>
+                  <div className="w-full bg-gray-50 dark:bg-black p-4 rounded-md mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group border border-gray-200 dark:border-gray-800 overflow-hidden">
+                    {/* The Quarantine Wrapper - Stops the zoom Bug */}
+                    <div className="w-full min-w-0 overflow-x-auto scrollbar-hide pb-2 sm:pb-0">
+                      <code className="text-sm sm:text-lg text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none]">
+                        {/* The OS Prefix */}
+                        <span className="text-gray-400 dark:text-gray-500 select-none text-xs sm:text-sm">
+                          {getOSPrefix(activeOS)}&nbsp;
+                        </span>
+                        {/* The actual command */}
+                        <span>{displayCmd.command}</span>
+                      </code>
+                    </div>
+
                     <button
                       onClick={() =>
                         handleCopy(displayCmd.id, displayCmd.command)
                       }
-                      className="cursor-pointer text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-3 py-1.5 rounded transition-all font-sans text-gray-700 dark:text-gray-300 min-w-[80px]"
+                      className="shrink-0 cursor-pointer text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-3 py-1.5 rounded transition-all font-sans text-gray-700 dark:text-gray-300 min-w-[80px] w-full sm:w-auto text-center"
                     >
                       {copiedId === displayCmd.id ? "Copied!" : "Copy"}
                     </button>
