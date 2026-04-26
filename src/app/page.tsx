@@ -325,12 +325,43 @@ export default function Home() {
       <TerminalParticles />
 
       {/* Main Content: Add z-10 and relative to sit above particles */}
-      <main className="p-4 sm:p-6 md:p-10 w-full max-w-[100vw] overflow-x-hidden max-w-5xl mx-auto relative z-10 transition-colors duration-300 min-h-screen">
-        {/* --- Theme Toggle --- */}
-        <div className="fixed top-4 right-4 md:top-8 md:right-8 z-[100]">
+      <main className="p-4 sm:p-6 md:p-10 w-full max-w-4xl mx-auto relative z-10 transition-colors duration-300 min-h-screen overflow-x-hidden">
+        {/* Header Section - Unified and Responsive */}
+        <div className="flex justify-between items-start sm:items-center mb-8 gap-4 w-full">
+          {/* Left Side: Logo, Title, and Version Badge */}
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <Image
+              src={"/logo.png"}
+              alt="Cmdlify Logo"
+              width={128}
+              height={128}
+              onClick={handleRefreshPage}
+              className="cursor-pointer w-12 h-12 sm:w-16 sm:h-16 rounded-full shadow-[0_0_15px_rgba(74,222,128,0.3)] border border-gray-800 shrink-0"
+            />
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center">
+              <span>Cmdlify</span>
+              <span className="text-gray-500 font-normal text-lg hidden md:inline ml-3">
+                - Simplify Your Terminal Experience
+              </span>
+            </h1>
+
+            {/* Version Info - Back inline on desktop, wraps on mobile */}
+            <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-green-500/30 dark:border-green-500/50 text-green-700 dark:text-green-400 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-full shadow-[0_0_15px_rgba(34,197,94,0.2)] font-mono text-xs sm:text-sm transition-all hover:border-green-500 cursor-default">
+              <div className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-full w-full bg-green-500"></span>
+              </div>
+              <span className="text-xs whitespace-nowrap">
+                Last Updated:{" "}
+                {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"} (v1.2)
+              </span>
+            </div>
+          </div>
+
+          {/* Right Side: Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="cursor-pointer p-2.5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors shadow-sm"
+            className="cursor-pointer p-2.5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors shadow-sm shrink-0"
             title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
           >
             {theme === "dark" ? (
@@ -339,54 +370,6 @@ export default function Home() {
               <FiMoon className="text-xl" />
             )}
           </button>
-        </div>
-
-        {/* Header Section */}
-        <div className="flex flex-col mb-8 gap-4 w-full">
-          {/* Top Row: Logo, Title, and Theme Toggle */}
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-3 sm:gap-4">
-              <Image
-                src={"/logo.png"}
-                alt="Cmdlify Logo"
-                width={128}
-                height={128}
-                onClick={handleRefreshPage}
-                className="cursor-pointer w-10 h-10 sm:w-16 sm:h-16 rounded-full shadow-[0_0_15px_rgba(74,222,128,0.3)] border border-gray-800 shrink-0"
-              />
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center">
-                <span>Cmdlify</span>
-                <span className="text-gray-500 font-normal text-lg hidden sm:inline ml-3">
-                  - Simplify Your Terminal Experience
-                </span>
-              </h1>
-            </div>
-
-            {/* Theme Toggle - Now safely in the flow of the document */}
-            <button
-              onClick={toggleTheme}
-              className="cursor-pointer p-2.5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors shadow-sm shrink-0"
-              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            >
-              {theme === "dark" ? (
-                <FiSun className="text-xl" />
-              ) : (
-                <FiMoon className="text-xl" />
-              )}
-            </button>
-          </div>
-
-          {/* Bottom Row: Version Info */}
-          <div className="inline-flex w-fit items-center gap-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-green-500/30 dark:border-green-500/50 text-green-700 dark:text-green-400 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-[0_0_15px_rgba(34,197,94,0.2)] font-mono text-xs sm:text-sm transition-all hover:border-green-500 cursor-default">
-            <div className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-full w-full bg-green-500"></span>
-            </div>
-            <span className="whitespace-nowrap">
-              Last Updated:{" "}
-              {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"} (v1.1)
-            </span>
-          </div>
         </div>
 
         <div className="relative mb-8 z-50">
@@ -513,8 +496,9 @@ export default function Home() {
 
                   {/* Command Line - The Grid Fix */}
                   <div className="grid grid-cols-1 bg-gray-50 dark:bg-black p-3 sm:p-4 rounded-md mb-4 border border-gray-200 dark:border-gray-800 w-full">
-                    <div className="flex flex-col sm:flex-row gap-3 w-full">
-                      {/* The Code Container - min-w-0 is the magic key */}
+                    {/* ADDED sm:items-center HERE to fix the vertical text alignment */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full">
+                      {/* The Code Container */}
                       <div className="flex-1 min-w-0 w-full overflow-x-auto scrollbar-hide pb-2 sm:pb-0">
                         <code className="text-sm sm:text-base text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none] pr-4">
                           <span className="text-gray-400 dark:text-gray-500 select-none text-xs sm:text-sm">
