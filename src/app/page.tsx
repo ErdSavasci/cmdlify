@@ -341,40 +341,51 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          {/* Logo and Title Container */}
-          <div className="flex flex-wrap items-center gap-4">
-            {/* The Logo with a subtle neon glow effect */}
-            <Image
-              src={"/logo.png"}
-              alt="Cmdlify Logo"
-              width={128}
-              height={128}
-              onClick={handleRefreshPage}
-              className="cursor-pointer w-12 h-12 md:w-16 md:h-16 rounded-full shadow-[0_0_15px_rgba(74,222,128,0.3)] border border-gray-800"
-            />
-
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center">
-              <span>Cmdlify</span>
-              <span className="text-gray-500 font-normal text-xl hidden sm:inline ml-3">
-                - Simplify Your Terminal Experience
-              </span>
-            </h1>
-
-            {/* Version Info */}
-            <div className="z-50 flex items-center gap-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-green-500/30 dark:border-green-500/50 text-green-700 dark:text-green-400 px-4 py-2.5 rounded-full shadow-[0_0_15px_rgba(34,197,94,0.2)] font-mono text-sm transition-all hover:border-green-500 dark:hover:border-green-400 hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] cursor-default">
-              {/* Flashing Status Dot */}
-              <div className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-              </div>
-
-              <span className="truncate" style={{ fontSize: "0.65rem" }}>
-                Last Updated:{" "}
-                {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"}
-                {" (v1.1)"}
-              </span>
+        {/* Header Section */}
+        <div className="flex flex-col mb-8 gap-4 w-full">
+          {/* Top Row: Logo, Title, and Theme Toggle */}
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <Image
+                src={"/logo.png"}
+                alt="Cmdlify Logo"
+                width={128}
+                height={128}
+                onClick={handleRefreshPage}
+                className="cursor-pointer w-10 h-10 sm:w-16 sm:h-16 rounded-full shadow-[0_0_15px_rgba(74,222,128,0.3)] border border-gray-800 shrink-0"
+              />
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center">
+                <span>Cmdlify</span>
+                <span className="text-gray-500 font-normal text-lg hidden sm:inline ml-3">
+                  - Simplify Your Terminal Experience
+                </span>
+              </h1>
             </div>
+
+            {/* Theme Toggle - Now safely in the flow of the document */}
+            <button
+              onClick={toggleTheme}
+              className="cursor-pointer p-2.5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors shadow-sm shrink-0"
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {theme === "dark" ? (
+                <FiSun className="text-xl" />
+              ) : (
+                <FiMoon className="text-xl" />
+              )}
+            </button>
+          </div>
+
+          {/* Bottom Row: Version Info */}
+          <div className="inline-flex w-fit items-center gap-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-green-500/30 dark:border-green-500/50 text-green-700 dark:text-green-400 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-[0_0_15px_rgba(34,197,94,0.2)] font-mono text-xs sm:text-sm transition-all hover:border-green-500 cursor-default">
+            <div className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-full w-full bg-green-500"></span>
+            </div>
+            <span className="whitespace-nowrap">
+              Last Updated:{" "}
+              {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"} (v1.1)
+            </span>
           </div>
         </div>
 
@@ -432,13 +443,13 @@ export default function Home() {
           )}
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-gray-800 pb-4">
+        {/* Category Tabs - Now a swipeable horizontal row on mobile */}
+        <div className="flex overflow-x-auto gap-2 mb-8 border-b border-gray-800 pb-4 w-full scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`cursor-pointer px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`cursor-pointer px-4 py-2 rounded-md text-sm font-medium transition-all shrink-0 whitespace-nowrap ${
                 selectedCategory === cat.id
                   ? "bg-white dark:bg-gray-800 text-green-600 dark:text-green-400 shadow-sm border border-green-200 dark:border-green-900/50 bg-green-50/50"
                   : "bg-transparent text-gray-600 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-900 border border-transparent"
@@ -500,28 +511,29 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* Command Line (Flexbox Blowout Fix) */}
-                  <div className="w-full bg-gray-50 dark:bg-black p-3 sm:p-4 rounded-md mb-4 border border-gray-200 dark:border-gray-800">
-                    {/* Independent Scrolling Container */}
-                    <div className="w-full overflow-x-auto scrollbar-hide mb-3 pb-1 border-b border-gray-200 dark:border-gray-800 sm:border-none sm:mb-0 sm:pb-0">
-                      <code className="block text-sm sm:text-lg text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none] min-w-max">
-                        <span className="text-gray-400 dark:text-gray-500 select-none text-xs sm:text-sm">
-                          {getOSPrefix(activeOS)}&nbsp;
-                        </span>
-                        <span>{displayCmd.command}</span>
-                      </code>
-                    </div>
+                  {/* Command Line - Strictly Constrained */}
+                  <div className="w-full max-w-full bg-gray-50 dark:bg-black p-3 sm:p-4 rounded-md mb-4 border border-gray-200 dark:border-gray-800">
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      {/* The Code Container */}
+                      <div className="w-full overflow-x-auto scrollbar-hide pb-2 sm:pb-0">
+                        <code className="inline-block text-sm sm:text-base text-gray-900 dark:text-white font-mono whitespace-nowrap [font-variant-ligatures:none] pr-4">
+                          <span className="text-gray-400 dark:text-gray-500 select-none text-xs sm:text-sm">
+                            {getOSPrefix(activeOS)}&nbsp;
+                          </span>
+                          <span>{displayCmd.command}</span>
+                        </code>
+                      </div>
 
-                    <button
-                      onClick={() =>
-                        handleCopy(displayCmd.id, displayCmd.command)
-                      }
-                      className="w-full sm:w-auto sm:float-right cursor-pointer text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded transition-all font-sans text-gray-700 dark:text-gray-300 font-medium"
-                    >
-                      {copiedId === displayCmd.id ? "Copied!" : "Copy"}
-                    </button>
-                    {/* Clearfix for the float on desktop */}
-                    <div className="clear-both hidden sm:block"></div>
+                      {/* The Copy Button */}
+                      <button
+                        onClick={() =>
+                          handleCopy(displayCmd.id, displayCmd.command)
+                        }
+                        className="shrink-0 cursor-pointer text-sm bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded transition-all font-sans text-gray-700 dark:text-gray-300 font-medium w-full sm:w-auto text-center"
+                      >
+                        {copiedId === displayCmd.id ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
                   </div>
 
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
