@@ -353,7 +353,7 @@ export default function Home() {
               </div>
               <span className="text-xs whitespace-nowrap">
                 Last Updated:{" "}
-                {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"} (v1.2)
+                {process.env.NEXT_PUBLIC_LAST_MODIFIED || "Just now"} (v1.2.0)
               </span>
             </div>
           </div>
